@@ -1,4 +1,4 @@
-# Cкелет проетка
+# Cкелет проекта
 
 В основе сервиса [Express.js](https://expressjs.com/) и [pug.js](https://pugjs.org/).  
 Статика сервиса размещается на CDN [Surge](https://surge.sh/), а сам сервис в облаке [Now](https://zeit.co/now).
