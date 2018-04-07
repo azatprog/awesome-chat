@@ -17,10 +17,14 @@ const isAuthenticated = function (req, res, next) {
 
 module.exports = (app, passport) => {
     app.get('/', isAuthenticated, function (req, res) {
-        console.log(req.user);
+        res.send(req.user);
     });
-    app.post('/login', passport.authenticate('local', { successRedirect: '/',
-        failureRedirect: '/login' }));
+
+    app.post('/login',
+        passport.authenticate('local'),
+        function (req, res) {
+            res.send(req.user);
+        });
 
     app.get('/users', users.list);
     app.get('/users/:id', users.detail);
@@ -31,4 +35,4 @@ module.exports = (app, passport) => {
     app.post('/contacts', contacts.create);
 
     app.all('*', error404);
-};
+}
