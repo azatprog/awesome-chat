@@ -6,6 +6,10 @@ exports.create = (req, res) => {
         participants: req.body.participants,
     });
 
+    if (req.body.name) {
+        chat.name = req.body.name;
+    }
+
     chat.save(function (err) {
         if (!err) {
             return res.status(200).send();
