@@ -57,6 +57,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 
 // Выводим ошибку, если не смогли разобрать POST запрос, и продолжаем работу
 app.use((err, req, res, next) => {
