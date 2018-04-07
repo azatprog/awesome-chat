@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
-    UserContactModel.find({'user': req.params.id}, function (err, user_data) {
+    UserContactModel.find({'user': req.user._id}, function (err, user_data) {
         if (!err) {
             return res.status(200).send(user_data);
         } else {
