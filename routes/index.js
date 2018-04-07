@@ -3,6 +3,7 @@
 const {error404} = require('../controllers/errors');
 const users = require('../controllers/users');
 const contacts = require('../controllers/contacts');
+const chats = require('../controllers/chats');
 
 const isAuthenticated = function (req, res, next) {
     // If user is authenticated in the session, call the next() to call the next request handler
@@ -34,5 +35,9 @@ module.exports = (app, passport) => {
     app.get('/contacts', contacts.list);
     app.post('/contacts', contacts.create);
 
+    app.get('/chats', chats.list);
+    app.post('/chats/add', chats.addParticipant);
+    app.post('/chats', chats.create);
+
     app.all('*', error404);
-}
+};
