@@ -20,12 +20,29 @@ const commonData = require('./middlewares/common-data');
 const app = express();
 
 // Configuring Passport
-var passport = require('passport');
-require('./config/passport')(passport); // Pass passport for configuration
-var expressSession = require('express-session');
-app.use(expressSession({secret: 'mySecretKey'}));
+const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+app.use(require('express-session')({
+    secret: 'super secret',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+var User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+// var passport = require('passport');
+// require('./config/passport')(passport); // Pass passport for configuration
+// var expressSession = require('express-session');
+// app.use(expressSession({secret: 'mySecretKey'}));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Подключаем шаблонизатор
 app.set('view engine', 'pug');
@@ -60,7 +77,7 @@ app.use((err, req, res, next) => {
 app.use(commonData);
 
 // Подключаем маршруты
-routes(app);
+routes(app, passport);
 
 // Фиксируем фатальную ошибку и отправляем ответ с кодом 500
 app.use((err, req, res, next) => {
