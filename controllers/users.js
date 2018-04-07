@@ -25,8 +25,15 @@ exports.detail = (req, res) => {
     });
 };
 
+exports.doLogin = function (req, res) {
+    passport.authenticate('local')(req, res, function () {
+        res.redirect('/');
+    });
+};
+
 exports.list = (req, res) => {
     UserModel.find({}, function(err, users) {
         return res.status(200).send({users: users});
     });
 };
+
