@@ -26,8 +26,14 @@ const app = express();
 mongoose.connect(dbConfig.url);
 
 app.use(expressSession({secret: 'mySecretKey'}));
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+const User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Подключаем шаблонизатор
 app.set('view engine', 'pug');
@@ -62,7 +68,7 @@ app.use((err, req, res, next) => {
 app.use(commonData);
 
 // Подключаем маршруты
-routes(app);
+routes(app, passport);
 
 // Фиксируем фатальную ошибку и отправляем ответ с кодом 500
 app.use((err, req, res, next) => {
