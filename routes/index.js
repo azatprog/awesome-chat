@@ -24,7 +24,7 @@ module.exports = (app, passport) => {
 
     app.post('/users', create);
 
-    app.get('/users/:id', item);
+    app.get('/users/:id', isAuthenticated, item);
 
     app.all('*', error404);
 };
