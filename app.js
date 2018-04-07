@@ -15,6 +15,7 @@ const mongoose = require('mongoose');
 
 // Configuring Passport
 const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 require('./config/passport')(passport); // Pass passport for configuration
 const expressSession = require('express-session');
 
