@@ -12,17 +12,19 @@ const morgan = require('morgan');
 // MONGO stuff
 const dbConfig = require('./config/db.js');
 const mongoose = require('mongoose');
-mongoose.connect(dbConfig.url);
+
+// Configuring Passport
+const passport = require('passport');
+require('./config/passport')(passport); // Pass passport for configuration
+const expressSession = require('express-session');
 
 const routes = require('./routes/index');
 const commonData = require('./middlewares/common-data');
 
 const app = express();
 
-// Configuring Passport
-var passport = require('passport');
-require('./config/passport')(passport); // Pass passport for configuration
-var expressSession = require('express-session');
+mongoose.connect(dbConfig.url);
+
 app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
