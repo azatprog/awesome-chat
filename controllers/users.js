@@ -33,3 +33,9 @@ exports.list = (req, res) => {
     });
 };
 
+exports.search = (req, res) => {
+    UserModel.find({'username': req.params.username}, function (err, users) {
+        return res.status(200).send({users: users});
+    });
+};
+

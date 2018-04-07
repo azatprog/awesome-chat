@@ -24,6 +24,7 @@ module.exports = (app, passport) => {
 
     app.get('/users', users.list);
     app.get('/users/:id', users.detail);
+    app.get('/users/search/:username', users.search);
     app.post('/users', users.create);
 
     app.get('/contacts', contacts.list);
