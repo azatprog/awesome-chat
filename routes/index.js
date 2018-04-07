@@ -23,8 +23,8 @@ module.exports = (app, passport) => {
         failureRedirect: '/login' }));
 
     app.get('/users', users.list);
-    app.post('/users', users.create);
     app.get('/users/:id', users.detail);
+    app.post('/users', users.create);
 
     app.get('/contacts', contacts.list);
     app.post('/contacts', contacts.create);
