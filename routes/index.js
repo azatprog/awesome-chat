@@ -2,6 +2,7 @@
 
 const {error404} = require('../controllers/errors');
 const users = require('../controllers/users');
+const contacts = require('../controllers/contacts');
 
 const isAuthenticated = function (req, res, next) {
     // If user is authenticated in the session, call the next() to call the next request handler
@@ -21,8 +22,12 @@ module.exports = (app, passport) => {
     app.post('/login', passport.authenticate('local', { successRedirect: '/',
         failureRedirect: '/login' }));
 
+    app.get('/users', users.list);
     app.post('/users', users.create);
-    app.get('/users/:id', isAuthenticated, users.item);
+    app.get('/users/:id', users.detail);
+
+    app.get('/contacts', contacts.list);
+    app.post('/contacts', contacts.create);
 
     app.all('*', error404);
 };
