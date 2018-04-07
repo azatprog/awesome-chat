@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilService } from '../services/util.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  contacts: User[];
+  constructor(private utilService: UtilService) {
+    this.contacts = utilService.getContacts();
+  }
 
   ngOnInit() {
   }
 
+  identify = (inx, item) => inx;
 }

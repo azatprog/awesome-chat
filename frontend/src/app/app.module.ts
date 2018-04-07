@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { MainComponent } from './main/main.component';
+import { UtilService } from './services/util.service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { MainComponent } from './main/main.component';
     FormsModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
   ],
-  providers: [],
+  providers: [ UtilService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
