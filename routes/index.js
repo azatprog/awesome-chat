@@ -3,7 +3,7 @@
 const {error404} = require('../controllers/errors');
 const {create, item} = require('../controllers/users');
 
-module.exports = (app, db) => {
+module.exports = app => {
     app.get('/', function (req, res) {
         res.render('index', {...res.locals});
     });
