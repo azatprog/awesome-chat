@@ -9,6 +9,11 @@ const config = require('config');
 const pug = require('pug');
 const morgan = require('morgan');
 
+// MONGO stuff
+const dbConfig = require('./config/db.js');
+const mongoose = require('mongoose');
+mongoose.connect(dbConfig.url);
+
 const routes = require('./routes/index');
 const commonData = require('./middlewares/common-data');
 

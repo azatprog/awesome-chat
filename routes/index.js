@@ -2,7 +2,7 @@
 
 const {error404} = require('../controllers/errors');
 
-module.exports = app => {
+module.exports = (app, db) => {
     app.get('/', function (req, res) {
         res.render('index', {...res.locals});
     });
