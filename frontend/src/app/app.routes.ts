@@ -1,14 +1,15 @@
 import { AppComponent } from './app.component';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'app', component: AppComponent,
-        children: [
+    // { path: 'app', component: AppComponent,
+        // children: [
             { path: '', redirectTo: 'login', pathMatch: 'full'},
             { path: 'login', component: LoginComponent },
-            // { path: 'main', component: MainComponent,
+            { path: 'main', component: MainComponent },
             //     children: [
             //         { path: '', redirectTo: 'mission', pathMatch: 'full'},
             //         { path: 'mission', component: MissionComponent },
@@ -23,7 +24,7 @@ export const ROUTES: Routes = [
             //         { path: 'about', component: AboutComponent }                    
             //     ]
             // }            
-        ]
-    },
+        // ]
+    // },
     { path: '**', component: LoginComponent },
 ];
