@@ -14,6 +14,14 @@ const commonData = require('./middlewares/common-data');
 
 const app = express();
 
+// Configuring Passport
+var passport = require('passport');
+require('./config/passport')(passport); // Pass passport for configuration
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Подключаем шаблонизатор
 app.set('view engine', 'pug');
 // Подключаем директорию с шаблонами
