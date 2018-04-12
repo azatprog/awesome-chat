@@ -23,6 +23,8 @@ const routes = require('./routes/index');
 const commonData = require('./middlewares/common-data');
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -90,7 +92,18 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(config.get('port'), () => {
+
+const eventSocket = io.of('/events');
+// on connection event
+eventSocket.on('connection', function (socket) {
+    console.log('Client connected...');
+    socket.on('join', function (eventData) {
+        console.log("Joined");
+    });
+});
+
+
+server.listen(config.get('port'), () => {
     console.info(`Open http://localhost:${config.get('port')}/`);
 });
 
