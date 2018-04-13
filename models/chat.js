@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const ChatsSchema = new Schema({
     owner: { type: String, required: true},
+    name: {type: String, required: false},
     participants: { type: Array, required: true},
 });
 
