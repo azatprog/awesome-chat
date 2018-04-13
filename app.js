@@ -34,7 +34,10 @@ app.use(function (req, res, next) {
 
 mongoose.connect(dbConfig.url);
 
-app.use(expressSession({secret: 'mySecretKey'}));
+app.use(expressSession({
+    secret: 'mySecretKey',
+    cookie: {maxAge: 3600000}
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -4,6 +4,7 @@ const {error404} = require('../controllers/errors');
 const users = require('../controllers/users');
 const contacts = require('../controllers/contacts');
 const chats = require('../controllers/chats');
+const messages = require('../controllers/messages');
 
 const isAuthenticated = function (req, res, next) {
     // If user is authenticated in the session, call the next() to call the next request handler
@@ -17,9 +18,10 @@ const isAuthenticated = function (req, res, next) {
 };
 
 module.exports = (app, passport) => {
-    app.get('/', isAuthenticated, function (req, res) {
-        res.send(req.user);
-    });
+
+    // app.get('/', isAuthenticated, function (req, res) {
+    //     res.send(req.user);
+    // });
 
     app.post('/login',
         passport.authenticate('local'),
@@ -38,6 +40,10 @@ module.exports = (app, passport) => {
     app.get('/chats', chats.list);
     app.post('/chats/add', chats.addParticipant);
     app.post('/chats', chats.create);
+
+    app.get('/messages', messages.list);
+    app.post('/messages', messages.create);
+    app.delete('/messages', messages.delete);
 
     app.all('*', error404);
 };
