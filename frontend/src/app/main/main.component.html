@@ -76,9 +76,10 @@
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<input type="text" placeholder="Write your message..." [(ngModel)]="newMessage" />
-			<!-- <i class="fa fa-paperclip attachment" aria-hidden="true"></i> -->
-			<button class="submit" (click)="sendMsg()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				<form (ngSubmit)="sendMsg()">
+					<input type="text" id="msgInput" name="msgInput" placeholder="Write your message..." [(ngModel)]="newMessage" />
+					<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				</form>
 			</div>
 		</div>
 	</div>
