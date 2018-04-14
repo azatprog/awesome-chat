@@ -95,7 +95,7 @@ eventSocket.on('connection', function (socket) {
         socket.emit('loadContacts', users);
     });
 
-    Message.find({}).sort('-_id').limit(10).exec(function (err, messages) {
+    Message.find({}).exec(function (err, messages) {
         console.log('Messages sent.');
         socket.emit('loadMessages', messages);
     });
