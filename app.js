@@ -85,10 +85,16 @@ app.use((err, req, res, next) => {
 
 
 const Message = require('./models/message');
+const User = require('./models/users');
 const eventSocket = io.of('/events');
 
 eventSocket.on('connection', function (socket) {
     console.log('Client connected...');
+
+    User.find().exec(function (err, users) {
+        socket.emit('loadContacts', users);
+    });
+
     Message.find({}).sort('-_id').limit(10).exec(function (err, messages) {
         console.log('Messages sent.');
         socket.emit('loadMessages', messages);
