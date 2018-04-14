@@ -68,7 +68,7 @@
 		<div class="messages" #scrollMe>
 			<ul>
 				<li *ngFor="let m of messages; trackBy: identify" 
-					[ngClass]="{'sent':m.sender !== me, 'replies': m.sender === me }" >
+					[ngClass]="{'sent':m.sender !== me.email, 'replies': m.sender === me.email }" >
 					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
 					<p> {{ m.text }} </p>
 				</li>
