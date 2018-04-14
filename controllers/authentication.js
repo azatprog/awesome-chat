@@ -10,6 +10,7 @@ let sendJSONresponse = function(res, status, content) {
 
 module.exports.register = function(req, res) {
   console.log('in register..');
+
   let user = new User();
 
   user.name = req.body.name;
@@ -32,6 +33,7 @@ module.exports.register = function(req, res) {
     res.json({
       "token" : token
     });
+    req.app.socket.emit('newUserRegistered', user.name);
   });
 
 };

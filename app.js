@@ -103,6 +103,8 @@ eventSocket.on('connection', function (socket) {
     });
 });
 
+app.socket = eventSocket;
+
 server.listen(config.get('port'), () => {
     console.info(`Open http://localhost:${config.get('port')}/`);
 });
