@@ -29,6 +29,10 @@ export class MainComponent implements OnInit, AfterViewChecked {
         this.scrollToBottom();
     }
 
+    logout() {
+      this.authService.logout();
+    }
+
     ngAfterViewChecked() {
         this.scrollToBottom();
     }
