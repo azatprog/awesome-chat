@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { Usercreds } from '../model/usercreds.model';
 import { HttpClient } from '@angular/common/http';
 import { Socket } from 'ng-socket-io';
+import { Message } from '../model/message.model';
 
 
 @Injectable()
@@ -13,13 +14,27 @@ export class UtilService {
 
   contacts: User[];
   apiRoot: string = AppSettings.API_ROOT;
+  messages: Message[] = [];
 
   constructor(private http: HttpClient, private socket: Socket) {
     console.log('client socket..');
     socket.emit('join', { my: 'data' });
-    socket.on('reply', function (data) {
+    this.messages = this.getAllMessages();
+
+    socket.on('receiveMessage', (data: Message) => {
         console.log(data);
+        console.log(this.messages);
+        this.messages.push(data);
     });
+  }
+
+  getAllMessages() {
+    console.log('getall..');
+    return [ { sender: 'fanis', text: 'text123 from Fanis' } ];
+  }
+
+  sendMsg(msg) {
+    this.socket.emit('sendMessage', { sender: 'azat', text: msg });
   }
 
   getContacts() {
