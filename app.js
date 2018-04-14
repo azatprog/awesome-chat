@@ -82,12 +82,24 @@ app.use((err, req, res, next) => {
     }
 });
 
+
+
+const Message = require('./models/message');
 const eventSocket = io.of('/events');
-// on connection event
+
 console.log('next socket..');
 eventSocket.on('connection', function (socket) {
     console.log('Client connected...');
+    Message.find({}).limit(10).exec(function (err, messages) {
+        console.log('Messages sent.');
+        eventSocket.emit('loadMessages', messages);
+    });
     socket.on('sendMessage', function (msg) {
+        new Message({
+            sender: msg.sender,
+            text: msg.text
+        }).save();
+
         socket.emit('receiveMessage', msg);
     });
 });
