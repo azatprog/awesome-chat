@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="card card-container">
+      <p id="profile-name" class="profile-name-card"> Sign up </p>
+      <form novalidate
+            class="form-signin"
+            #f="ngForm"
+            (ngSubmit)="register()">
+          <span id="reauth-email" class="reauth-email"></span>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+            </div>
+            <input type="text" [(ngModel)]="credentials.email" name="email" class="form-control" id="inputEmail"  placeholder="Email" required autofocus>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+            </div>
+            <input type="text" [(ngModel)]="credentials.name" name="name" class="form-control" id="inputName"  placeholder="Name" required autofocus>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></div>
+            </div>
+            <input type="password" [(ngModel)]="credentials.password" name="password" class="form-control" id="inputPassword" placeholder="Password" required autofocus>
+          </div>
+
+          <button class="btn btn-lg btn-danger btn-block btn-signin" type="submit">Sign up</button>
+      </form>
+      <a href="/#/login" class="forgot-password">
+          Already a user? Sign in
+      </a>
+  </div>
+</div>

@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
+import { AppSettings } from '../app.settings';
+import { Headers, Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Usercreds } from '../model/usercreds.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UtilService {
 
   contacts: User[];
+  apiRoot: string = AppSettings.API_ROOT;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getContacts() {
     this.contacts = [
@@ -20,6 +26,34 @@ export class UtilService {
 
   getChatContent(id: number) {
 
+  }
+
+  login(user: Usercreds) {
+    const apiUrl = `${this.apiRoot}/login`;
+    console.log(apiUrl);
+    console.log(user);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return new Promise((resolve, reject) => {
+      // const apiUrl = this.apiRoot + '/' + path;
+      console.log(apiUrl);
+      this.http['post'](apiUrl, JSON.stringify(user))
+              .toPromise()
+              .then(
+                  res => {
+                      resolve(res);
+                  },
+                  err => {
+                      reject(err);
+                  }
+              );
+          });
+    // this.http.post(apiUrl, user, { headers })
+    //   .map(res => {
+    //     console.log(res);
+    //     return res;
+    //   });
   }
 
 }
