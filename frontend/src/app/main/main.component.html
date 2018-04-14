@@ -65,10 +65,10 @@
 				 <i class="fa fa-instagram" aria-hidden="true"></i>
 			</div>
 		</div>
-		<div class="messages">
+		<div class="messages" #scrollMe>
 			<ul>
 				<li *ngFor="let m of messages; trackBy: identify" 
-					[ngClass]="{'sent':m.sender !== 'azat', 'replies': m.sender === 'azat' }" >
+					[ngClass]="{'sent':m.sender !== me, 'replies': m.sender === me }" >
 					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
 					<p> {{ m.text }} </p>
 				</li>

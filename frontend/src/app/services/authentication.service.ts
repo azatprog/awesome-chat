@@ -25,6 +25,7 @@ export interface TokenPayload {
 @Injectable()
 export class AuthenticationService {
   private token: string;
+  public me: string;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -55,6 +56,7 @@ export class AuthenticationService {
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
     if (user) {
+      this.me = user.email;
       return user.exp > Date.now() / 1000;
     } else {
       return false;

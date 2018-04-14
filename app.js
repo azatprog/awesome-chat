@@ -92,7 +92,7 @@ eventSocket.on('connection', function (socket) {
     console.log('Client connected...');
     Message.find({}).limit(10).exec(function (err, messages) {
         console.log('Messages sent.');
-        eventSocket.emit('loadMessages', messages);
+        socket.emit('loadMessages', messages);
     });
     socket.on('sendMessage', function (msg) {
         new Message({
@@ -100,7 +100,7 @@ eventSocket.on('connection', function (socket) {
             text: msg.text
         }).save();
 
-        socket.emit('receiveMessage', msg);
+        eventSocket.emit('receiveMessage', msg);
     });
 });
 

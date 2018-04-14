@@ -7,6 +7,7 @@ import { Usercreds } from '../model/usercreds.model';
 import { HttpClient } from '@angular/common/http';
 import { Socket } from 'ng-socket-io';
 import { Message } from '../model/message.model';
+import { AuthenticationService } from './authentication.service';
 
 
 @Injectable()
@@ -17,24 +18,25 @@ export class UtilService {
   messages: Message[] = [];
 
   constructor(private http: HttpClient, private socket: Socket) {
+
     console.log('client socket..');
     socket.emit('join', { my: 'data' });
-    this.messages = this.getAllMessages();
+    // this.messages = this.getAllMessages();
+    socket.on('loadMessages', messages => {
+      console.log(messages);
+      messages.forEach(m => {
+        this.messages.push(m);
+      });
+      // this.messages = messages;
+    });
 
     socket.on('receiveMessage', (data: Message) => {
-        console.log(data);
-        console.log(this.messages);
         this.messages.push(data);
     });
   }
 
-  getAllMessages() {
-    console.log('getall..');
-    return [ { sender: 'fanis', text: 'text123 from Fanis' } ];
-  }
-
-  sendMsg(msg) {
-    this.socket.emit('sendMessage', { sender: 'azat', text: msg });
+  sendMsg(msg: string, me: string) {
+    this.socket.emit('sendMessage', { sender: me, text: msg });
   }
 
   getContacts() {
