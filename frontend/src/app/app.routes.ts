@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -11,7 +12,7 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'login', pathMatch: 'full'},
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
-            { path: 'main', component: MainComponent },
+            { path: 'main', component: MainComponent, canActivate: [AuthGuardService] },
             //     children: [
             //         { path: '', redirectTo: 'mission', pathMatch: 'full'},
             //         { path: 'mission', component: MissionComponent },

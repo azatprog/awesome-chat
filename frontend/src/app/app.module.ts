@@ -13,6 +13,7 @@ import { MainComponent } from './main/main.component';
 import { UtilService } from './services/util.service';
 import { AuthenticationService } from './services/authentication.service';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
   ],
-  providers: [ UtilService, AuthenticationService ],
+  providers: [ UtilService, AuthenticationService, AuthGuardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
