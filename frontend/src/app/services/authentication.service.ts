@@ -11,6 +11,7 @@ export interface UserDetails {
   name: string;
   exp: number;
   iat: number;
+  img: string;
 }
 
 interface TokenResponse {
@@ -21,6 +22,7 @@ export interface TokenPayload {
   email: string;
   password: string;
   name?: string;
+  img: string;
 }
 
 @Injectable()
@@ -60,6 +62,7 @@ export class AuthenticationService {
     if (user) {
       this.me.email = user.email;
       this.me.name = user.name;
+      this.me.img = user.img;
       return user.exp > Date.now() / 1000;
     } else {
       return false;

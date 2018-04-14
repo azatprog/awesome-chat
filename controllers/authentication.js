@@ -1,6 +1,7 @@
 let passport = require('passport');
 let mongoose = require('mongoose');
 let User = mongoose.model('User');
+const gravatar = require('gravatar-api');
 
 let sendJSONresponse = function(res, status, content) {
   res.status(status);
@@ -13,13 +14,21 @@ module.exports.register = function(req, res) {
 
   user.name = req.body.name;
   user.email = req.body.email;
+  const options = {
+      email: user.email
+  }
+  const avatar = gravatar.imageUrl(options);
+  user.img = avatar;
 
+  console.log(user);
   user.setPassword(req.body.password);
 
   user.save(function(err) {
     let token;
     token = user.generateJwt();
     res.status(200);
+    
+    
     res.json({
       "token" : token
     });

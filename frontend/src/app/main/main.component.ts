@@ -19,6 +19,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
   me: Me;
   constructor(private utilService: UtilService, private authService: AuthenticationService) {
     this.me = authService.me;
+    console.log(this.me);
     this.contacts = utilService.getContacts();
     this.messages = this.utilService.messages;
   }
