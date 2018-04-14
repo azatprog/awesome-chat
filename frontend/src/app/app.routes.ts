@@ -9,7 +9,7 @@ export const ROUTES: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     // { path: 'app', component: AppComponent,
         // children: [
-            { path: '', redirectTo: 'login', pathMatch: 'full'},
+            { path: '', redirectTo: 'main', pathMatch: 'full'},
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'main', component: MainComponent, canActivate: [AuthGuardService] },

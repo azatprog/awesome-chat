@@ -3,6 +3,7 @@ import { UtilService } from '../services/util.service';
 import { User } from '../model/user.model';
 import { Message } from '../model/message.model';
 import { AuthenticationService } from '../services/authentication.service';
+import { Me } from '../model/me.model';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +16,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
   contacts: User[];
   messages: Message[];
   newMessage: string;
-  me: string;
+  me: Me;
   constructor(private utilService: UtilService, private authService: AuthenticationService) {
     this.me = authService.me;
     this.contacts = utilService.getContacts();
@@ -39,7 +40,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
   identify = (inx, item) => inx;
 
   sendMsg() {
-    this.utilService.sendMsg(this.newMessage, this.me);
+    this.utilService.sendMsg(this.newMessage, this.me.email);
     this.newMessage = '';
   }
 }

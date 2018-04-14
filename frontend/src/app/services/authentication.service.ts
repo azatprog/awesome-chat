@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
+import { Me } from '../model/me.model';
 
 export interface UserDetails {
   _id: string;
@@ -25,7 +26,7 @@ export interface TokenPayload {
 @Injectable()
 export class AuthenticationService {
   private token: string;
-  public me: string;
+  public me: Me = new Me();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -55,8 +56,10 @@ export class AuthenticationService {
 
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
+    console.log(user);
     if (user) {
-      this.me = user.email;
+      this.me.email = user.email;
+      this.me.name = user.name;
       return user.exp > Date.now() / 1000;
     } else {
       return false;
