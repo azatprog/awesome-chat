@@ -17,6 +17,8 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 require('./models/db');
 require('./config/passport');
@@ -80,7 +82,17 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(config.get('port'), () => {
+const eventSocket = io.of('/events');
+// on connection event
+eventSocket.on('connection', function (socket) {
+    console.log('Client connected...');
+    socket.on('join', function (eventData) {
+        console.log("Joined");
+        socket.emit('reply', { 'tets': 'text123' });
+    });
+});
+
+server.listen(config.get('port'), () => {
     console.info(`Open http://localhost:${config.get('port')}/`);
 });
 
