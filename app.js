@@ -87,9 +87,8 @@ const eventSocket = io.of('/events');
 console.log('next socket..');
 eventSocket.on('connection', function (socket) {
     console.log('Client connected...');
-    socket.on('join', function (eventData) {
-        console.log("Joined");
-        socket.emit('reply', { 'tets': 'text123' });
+    socket.on('sendMessage', function (msg) {
+        socket.emit('receiveMessage', msg);
     });
 });
 
