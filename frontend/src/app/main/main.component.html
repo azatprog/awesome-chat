@@ -30,16 +30,16 @@
 		</div>		
 		<div id="contacts">
 			<ul>
-				<li class="contact" *ngFor="let c of contacts; trackBy: identify">
+				<li class="contact" *ngFor="let c of utilService.contacts; trackBy: identify">
 					<div class="wrap">
 						<img [src]="c.img" alt="" />
 						<div class="meta">
-							<p class="name"> {{ c.username }} </p>
+							<p class="name"> {{ c.name }} </p>
 							<p class="preview"> {{ c.lastMsg }} </p>
 						</div>
 					</div>
 				</li>
-				<li class="contact active">
+				<!-- <li class="contact active">
 					<div class="wrap">
 						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
 						<div class="meta">
@@ -47,7 +47,7 @@
 							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
 						</div>
 					</div>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<div id="bottom-bar">
@@ -57,8 +57,8 @@
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-			<p>Harvey Specter</p>
+			<!-- <img [src]="me.img" alt="" /> -->
+			<!-- <p>Chat</p> -->
 			<div class="social-media">
 				<i class="fa fa-facebook" aria-hidden="true"></i>
 				<i class="fa fa-twitter" aria-hidden="true"></i>

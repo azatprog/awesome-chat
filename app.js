@@ -91,7 +91,8 @@ const eventSocket = io.of('/events');
 eventSocket.on('connection', function (socket) {
     console.log('Client connected...');
 
-    User.find().exec(function (err, users) {
+    User.find({}).exec(function (err, users) {
+        console.log(users);
         socket.emit('loadContacts', users);
     });
 

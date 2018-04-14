@@ -43,4 +43,4 @@ userSchema.methods.generateJwt = function() {
   }, "unicorn_secret"); // TODO not to keep in code!
 };
 
-mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

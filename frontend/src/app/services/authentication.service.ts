@@ -63,6 +63,7 @@ export class AuthenticationService {
       this.me.email = user.email;
       this.me.name = user.name;
       this.me.img = user.img;
+      console.log(this.me);
       return user.exp > Date.now() / 1000;
     } else {
       return false;
