@@ -84,6 +84,7 @@ app.use((err, req, res, next) => {
 
 const eventSocket = io.of('/events');
 // on connection event
+console.log('next socket..');
 eventSocket.on('connection', function (socket) {
     console.log('Client connected...');
     socket.on('join', function (eventData) {

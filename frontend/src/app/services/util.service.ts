@@ -5,6 +5,8 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Usercreds } from '../model/usercreds.model';
 import { HttpClient } from '@angular/common/http';
+import { Socket } from 'ng-socket-io';
+
 
 @Injectable()
 export class UtilService {
@@ -12,7 +14,13 @@ export class UtilService {
   contacts: User[];
   apiRoot: string = AppSettings.API_ROOT;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private socket: Socket) {
+    console.log('client socket..');
+    socket.emit('join', { my: 'data' });
+    socket.on('reply', function (data) {
+        console.log(data);
+    });
+  }
 
   getContacts() {
     this.contacts = [

@@ -14,6 +14,9 @@ import { UtilService } from './services/util.service';
 import { AuthenticationService } from './services/authentication.service';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000/events', options: {} };
 
 
 @NgModule({
@@ -28,6 +31,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     FormsModule,
     HttpModule,
     HttpClientModule,
+    SocketIoModule.forRoot(config),
     RouterModule.forRoot(ROUTES, { useHash: true }),
   ],
   providers: [ UtilService, AuthenticationService, AuthGuardService ],
